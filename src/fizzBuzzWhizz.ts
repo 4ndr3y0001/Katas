@@ -51,3 +51,9 @@ export const game = (input: number) => {
 
   return result === "" ? input : result;
 };
+
+// Plays the game for every number from 1 up to the given limit
+export const playUntil = (limit: number): (number | string)[] => {
+  if (limit <= 0) return [];
+  return Array.from({ length: limit }, (_, index) => game(index + 1));
+};

@@ -1,21 +1,41 @@
-# JAVASCRIPT CODE KATAS
+# FizzBuzzWhizz Kata
 
-Small coding exercises to learn Test Driven Development technique.
+TypeScript solution to the **FizzBuzz** kata from [JuanPa90Cap/Katas](https://github.com/JuanPa90Cap/Katas), built with **Test Driven Development** and **Jest**.
 
-## Set up
+## Rules
 
-1 - Clone this project running `https://github.com/JuanPa90Cap/Katas.git` in your terminal. If you haven't git installed can simply download it and unzip it.
+For a natural number greater than zero, `game(n)` returns:
 
-2 - Install all project dependencies with `npm install` or `yarn install` command.
+- `"Fizz"` when the number is divisible by 3
+- `"Buzz"` when the number is divisible by 5
+- `"Whizz"` when the number is prime (bonus rule)
+- The words are combined when more than one rule applies (for example `3 → "FizzWhizz"`, `15 → "FizzBuzz"`)
+- The number itself when no rule applies
 
-## Available Scripts
+## How it works
 
-In the project directory, you can run:
+All the logic lives in [`src/fizzBuzzWhizz.ts`](src/fizzBuzzWhizz.ts):
 
-### `npm run test` or  `yarn test`
+- **`isPrime(num)`** checks divisors only up to the square root of the number, which is enough to know whether it is prime.
+- **`game(input)`** starts with an empty string and appends `Fizz`, `Buzz` and `Whizz` according to each rule. If the string is still empty, it returns the number.
+- **`playUntil(limit)`** builds the list of results from 1 to `limit` with `Array.from`. For example, `playUntil(5)` returns `[1, "Whizz", "FizzWhizz", 4, "BuzzWhizz"]`.
 
-Launches the test runner.
+## Tests
 
-### `npm run test:watch` or  `yarn test:watch`
+The tests are in [`src/fizzBuzzWhizz.spec.ts`](src/fizzBuzzWhizz.spec.ts) and use `test.each`:
 
-Launches the test runner in watch mode.
+| Suite | What it checks | Tests |
+|-------|----------------|-------|
+| Full Table | Every number from the exercise tables | 12 |
+| Range from 1 to LIMIT | Each number from 1 to `LIMIT = 10`, plus `playUntil` with the full range, its length, and a limit of 0 | 13 |
+| Any number | Numbers outside the tables (97, 99, 100, 225, 1000) | 5 |
+| **Total** | | **30** |
+
+## Running the project
+
+```
+git clone https://github.com/4ndr3y0001/Katas.git
+cd Katas
+npm install
+npm test
+```
